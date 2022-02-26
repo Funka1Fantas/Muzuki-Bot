@@ -1,0 +1,2 @@
+node Muzuki.js
+pause
