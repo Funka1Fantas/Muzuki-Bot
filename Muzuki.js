@@ -9,7 +9,7 @@ let Config = JSON.parse(FileSystem.readFileSync('Config.json'))
 console.info('Запуск бота...')
 
 const Discord = require('discord.js')
-const {Client, Intents} = require('discord.js')
+const { Client, Intents } = require('discord.js')
 
 const Bot = new Discord.Client({intents: [
     Intents.FLAGS.GUILDS,
@@ -33,8 +33,9 @@ Bot.on('messageCreate', async message => {
         let cmd = args[0].replace(Config.Prefix, '')
         try {
             let { commandClass } = require(`./cmds/${cmd}.js`)
+            let authorMember = message.guild.members.cache.get(message.author.id);
             try {
-                commandClass.run(Bot, message, args, Config);
+                commandClass.run(Bot, message, args, Config, authorMember);
             } catch (error) {
                 message.channel.send('Команда **' + Config.Prefix + cmd + '** вернула исключение. Обратитесь к администратору проекта')
                 console.error('Ошибка во время выполнения команды ' + cmd + ':\n', error);

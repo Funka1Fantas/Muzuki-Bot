@@ -1,10 +1,10 @@
 // Получение discord.js и других библиотек
 const FileSystem = require('fs')
 const Discord = require('discord.js')
-const {Client, Intents} = require('discord.js')
+const { Client, Intents } = require('discord.js')
 
 class BotCommand {
-    static run(bot, message, args, Config) {
+    static async run(bot, message, args, Config, authorMember) {
 
         let sec = Math.floor((bot.uptime/1000)%60).toString().padStart(2, '0');
         let min = Math.floor((bot.uptime/1000/60)%60).toString().padStart(2, '0');
@@ -28,4 +28,5 @@ class BotCommand {
 module.exports = {
     commandClass: BotCommand,
     Description: 'Показывает статистику бота',
+    Visible: true,
  }
